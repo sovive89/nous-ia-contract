@@ -228,6 +228,10 @@ O usuário exigiu profundidade: ideia do projeto, escopo, propostas, tecnologias
 
 O usuário corrigiu que o nome respondido correspondia ao repositório e não ao produto e apontou uma tabela anterior. Essa tabela não está disponível no trecho acessível. Foi solicitada confirmação do nome. Enquanto ela não chega, o documento mantém **nome comercial pendente** e identifica somente nomes comprovados no código e no roadmap.
 
+Na retomada após a publicação inicial, o usuário forneceu uma pista concreta da conversa anterior: a ferramenta havia sido discutida como referência/comparação com **AWS Entity Resolution**, e ele havia rejeitado um nome que contivesse **“Entity” ou “Resolution”**, por parecer igual ao nome da AWS. O nome escolhido na tabela não foi recuperado. Essa restrição foi incorporada à especificação, sem inventar um nome substituto nem declarar equivalência funcional com o serviço AWS.
+
+Posteriormente, o usuário leu a lista mais longa. As associações explícitas foram **ingestão/conectores → NØUS Connect**, **engenharia semântica → NØUS Semantic Studio**, **processamento/distribuição → NØUS Transaction Core**, seguidas de **NØUS Analytics** e **NØUS Cloud Console**. Também leu Canonical Core, Contract Hub, Mapping Resolver e outros nomes, e hesitou ao procurar nomes de canvas/editor. O [catálogo de nomes recuperado](product-names.md) registra a lista, as diferenças de certeza e os termos da retomada anterior, sem pedir repetição da leitura e sem afirmar que o histórico completo ausente foi recuperado. Isso atualiza o estado de nome pendente da publicação inicial.
+
 ### Pergunta sobre modelo da sessão
 
 Houve uma pergunta por voz sobre o modelo de linguagem/esforço de pensamento em uso, sem resposta técnica verificável no trecho. Não confundir o modelo que atende esta conversa com uma integração de LLM no produto. Nenhum identificador de modelo de produção foi escolhido por essa pergunta.

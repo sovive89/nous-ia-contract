@@ -10,9 +10,13 @@
 
 ## 1. Nome, origem e limites deste documento
 
-O usuário está definindo uma ferramenta no contexto da NØUS IA. O nome comercial definitivo **não foi recuperado**. O usuário corrigiu explicitamente a associação entre o título do repositório e o nome do produto e informou que havia uma tabela no início de outra parte da conversa. Essa tabela não está no material acessível desta sessão. O nome deve ser preenchido a partir da confirmação do usuário, sem inventar uma marca ou promover uma sugestão a decisão.
+O usuário está definindo uma ferramenta no contexto da NØUS. Ele corrigiu explicitamente a associação entre o título do repositório e o nome do produto e informou que havia uma tabela anterior. Na retomada, leu as associações **NØUS Connect** (ingestão/conectores), **NØUS Semantic Studio** (engenharia semântica), **NØUS Transaction Core** (processamento/distribuição), **NØUS Analytics** e **NØUS Cloud Console**. O [catálogo de nomes recuperado](product-names.md) preserva essas associações e os demais nomes lidos, sem inventar a composição da tabela original inteira.
+
+A associação explícita para engenharia semântica é **NØUS Semantic Studio**. O posicionamento exato de cada motor interno, as alternativas comerciais hesitantes e o nome do componente de edição do canvas continuam a definir. Não transformar toda a lista de nomes em produtos independentes, sinônimos ou módulos já implementados.
 
 O README utiliza o título `NØUS IA — Contract Intelligence`, e a API utiliza `NØUS IA Contract Intelligence`. Esses são identificadores verificados dos artefatos atuais, não prova do nome comercial pretendido.
+
+**Critério de naming recuperado em esclarecimento posterior do usuário:** a ferramenta foi discutida tendo o **AWS Entity Resolution como referência**, mas o nome próprio **não deve conter “Entity” nem “Resolution”**, para não parecer uma reprodução do nome da AWS. A referência ao produto AWS não implica equivalência técnica de escopo, contratação do serviço ou decisão de implementar matching idêntico ao dele.
 
 Este documento reúne a conversa disponível, o código e a documentação versionada examinados. Não afirma reconstruir conversas anteriores não disponíveis ou a origem completa da empresa/produto. A evolução e as correções do usuário estão registradas em [session-decisions-2026-11-15.md](session-decisions-2026-11-15.md).
 
@@ -307,7 +311,7 @@ Nenhum API Gateway, Lambda, recurso AWS ou endpoint de ERP foi criado nesta sess
 | Contrato de evento | `event-envelope.schema.json` | JSON Schema Draft 2020-12 | Arquivo existente; integração runtime não presumida |
 | Pedido canônico fictício | `nous.delivery.order.v1` | `schemas/nous.delivery.order.v1.json` | Schema proposto; não aplicado pelo simulador |
 | Evento parcial do simulador | `nous.order-status.v1` | Referência textual no código | Não há arquivo correspondente nesta revisão |
-| Editor manual/personalizado | Nome comercial pendente | JSON → tabela → destino editável → contrato, autosave | Requisito, não implementado |
+| Editor manual/personalizado | Capacidade de engenharia semântica; nome da área recuperado: NØUS Semantic Studio | JSON → tabela → destino editável → contrato, autosave | Requisito, não implementado; organização interna a definir |
 | Registro de contratos | Designação funcional, não marca oficial | IDs, versões, estados, evidências | Proposto |
 | Motor de geração | Nome definitivo pendente | Interpretação, schemas, mapeamentos e validação | Proposto |
 | Jev | Nome citado no README/blueprint | API/adaptador a verificar oficialmente | `not_configured` |
@@ -405,7 +409,7 @@ Os documentos anteriores e schemas são úteis como proposta, mas não substitue
 
 Esta sequência é uma proposta de recortes; não é estimativa de prazo nem confirmação de execução:
 
-1. Confirmar nome comercial, componentes e destino ERP; manter distinção de fatos/propostas neste handoff.
+1. Usar o catálogo de nomes recuperado, definir os limites dos componentes e identificar o destino ERP; manter distinção de fatos/propostas neste handoff.
 2. Aprovar visual de nós circulares e a navegação até o detalhe, sem expandir o canvas inicial além do pedido atual.
 3. Construir UI com fixtures identificadas e rotas internas de evento/etapa; testar links, foco e RAW fixo.
 4. Implementar armazenamento RAW, tracking, etapas/tentativas e atualização real da timeline.
@@ -418,7 +422,7 @@ O escopo não permite prometer a conclusão do produto inteiro no mesmo dia. A d
 
 ## 14. Decisões pendentes e perguntas de continuidade
 
-1. Qual é o nome comercial correto da ferramenta? Recuperar a tabela mencionada pelo usuário.
+1. Como os componentes internos lidos se organizam no NØUS Semantic Studio e nos demais produtos? Usar as associações explícitas do catálogo, preservando os nomes ainda hesitantes e a restrição de não usar “Entity”/“Resolution” no nome próprio.
 2. Qual é a grafia/repositório do ERP mencionado como Popnova? Qual stack/banco/fluxo de pedidos ele usa?
 3. Qual produto/API é Jev, e qual documentação oficial deve orientar o adaptador?
 4. Agente revisor e auditor serão o mesmo módulo ou papéis separados?
