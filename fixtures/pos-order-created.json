@@ -1,0 +1,19 @@
+{
+  "event_id": "evt-pos-001",
+  "source": "pos-demo",
+  "tenant_id": "tenant-demo",
+  "event_type": "order.created",
+  "schema_ref": "pos.order.v1",
+  "occurred_at": "2026-11-15T10:00:00Z",
+  "correlation_id": "corr-001",
+  "causation_id": null,
+  "subject": {
+    "entity_type": "order",
+    "external_id": "ord-001"
+  },
+  "payload": {
+    "order_id": "ord-001",
+    "total_minor": 1590,
+    "currency": "BRL"
+  }
+}
