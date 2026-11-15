@@ -1,0 +1,20 @@
+{
+  "event_id": "evt-pay-001",
+  "source": "payments-demo",
+  "tenant_id": "tenant-demo",
+  "event_type": "payment.captured",
+  "schema_ref": "payments.capture.v1",
+  "occurred_at": "2026-11-15T10:01:00Z",
+  "correlation_id": "corr-001",
+  "causation_id": "evt-pos-001",
+  "subject": {
+    "entity_type": "payment",
+    "external_id": "pay-001"
+  },
+  "payload": {
+    "payment_id": "pay-001",
+    "order_external_id": "ord-001",
+    "amount_minor": 1590,
+    "currency": "BRL"
+  }
+}
