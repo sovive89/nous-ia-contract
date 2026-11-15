@@ -4,6 +4,8 @@ from typing import Any, Literal
 from jsonschema import Draft202012Validator
 from difflib import SequenceMatcher
 
+from app.simulators import router as simulators_router
+
 app = FastAPI(title="NØUS IA Contract Intelligence", version="0.1.0")
 
 class EvaluateRequest(BaseModel):
@@ -60,3 +62,6 @@ def validate_schema(req: SchemaRequest):
     except Exception as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     return {"valid": not errors, "errors": [{"path": list(e.path), "message": e.message} for e in errors]}
+
+
+app.include_router(simulators_router)
