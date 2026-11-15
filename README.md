@@ -2,6 +2,10 @@
 
 MVP inicial do motor de contratos semânticos da NØUS.
 
+## Documentação e continuidade
+
+O [índice de documentação e handoff](docs/README.md) reúne o [catálogo de nomes recuperado](docs/product-names.md), a [especificação detalhada](docs/product-specification.md), o [registro da evolução da conversa de 15/11/2026](docs/session-decisions-2026-11-15.md) e o [relatório de validação](docs/validation-2026-11-15.md). Os documentos distinguem código existente, requisitos, propostas, nomes recuperados e decisões ainda pendentes.
+
 ## Estado atual
 - API FastAPI
 - Avaliação inicial de mapeamento de campos, tipos e unidades

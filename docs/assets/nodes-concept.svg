@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Conceito de canvas com nós circulares</title>
+  <desc id="desc">Nós iFood e 99Food conectados a um nó NØUS IA. Representação conceitual de documentação, sem interface funcional.</desc>
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="14" cy="14" r="1.1" fill="#30333e"/></pattern>
+  </defs>
+  <rect width="1200" height="680" fill="#111318"/>
+  <rect width="1200" height="680" fill="url(#grid)"/>
+  <g fill="none" stroke="#77709a" stroke-width="2.5">
+    <path d="M 420 190 C 600 190 600 340 790 340"/>
+    <path d="M 420 490 C 600 490 600 340 790 340"/>
+  </g>
+  <circle cx="300" cy="190" r="120" fill="#ed002b" stroke="#747885" stroke-width="3"/>
+  <circle cx="300" cy="490" r="120" fill="#ffcf00" stroke="#747885" stroke-width="3"/>
+  <circle cx="910" cy="340" r="120" fill="#1b1d24" stroke="#ac6cff" stroke-width="4"/>
+  <g font-family="Segoe UI,Arial,sans-serif" text-anchor="middle">
+    <text x="300" y="207" fill="#ffffff" font-size="58" font-weight="700" font-style="italic">iFood</text>
+    <text x="300" y="509" fill="#111111" font-size="49" font-weight="700">99Food</text>
+    <text x="910" y="351" fill="#ffffff" font-size="49" letter-spacing="3">NØUS</text>
+    <text x="910" y="385" fill="#ffffff" font-size="20" letter-spacing="8">IA</text>
+  </g>
+  <g fill="#16171e" stroke="#a278be" stroke-width="3">
+    <circle cx="420" cy="190" r="7"/>
+    <circle cx="420" cy="490" r="7"/>
+  </g>
+  <circle cx="790" cy="340" r="8" fill="#ac6cff"/>
+</svg>

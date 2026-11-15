@@ -1,0 +1,12 @@
+{
+  "tenant_id": "demo-local",
+  "source": "99food",
+  "payload": {
+    "order_id": "PEDIDO-99FOOD-001",
+    "event_id": "EVENTO-99FOOD-001",
+    "status": "ACCEPTED",
+    "amount": "49.90",
+    "currency": "BRL",
+    "occurred_at": "2026-11-15T15:00:00Z"
+  }
+}
