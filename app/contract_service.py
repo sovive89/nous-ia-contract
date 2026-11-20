@@ -31,10 +31,13 @@ class ContractService:
             raise LifecycleError("Contract not found")
         return result
 
-    def version(self, contract_id, version_id):
-        result = self.db.scalar(select(ContractVersion).where(
+    def version(self, contract_id, version_id, lock=False):
+        stmt = select(ContractVersion).where(
             ContractVersion.id == version_id, ContractVersion.contract_id == contract_id,
-            ContractVersion.tenant_id == self.tenant_id))
+            ContractVersion.tenant_id == self.tenant_id)
+        if lock:
+            stmt = stmt.with_for_update()
+        result = self.db.scalar(stmt)
         if result is None:
             raise LifecycleError("Version not found")
         return result
@@ -68,7 +71,7 @@ class ContractService:
         return version
 
     def submit(self, contract_id, version_id):
-        version = self.version(contract_id, version_id)
+        version = self.version(contract_id, version_id, lock=True)
         if version.status != "DRAFT":
             raise LifecycleError("Only drafts can be submitted")
         version.status = "IN_REVIEW"
@@ -77,11 +80,11 @@ class ContractService:
         return version
 
     def decide(self, contract_id, version_id, approved, reason=None):
-        version = self.version(contract_id, version_id)
+        version = self.version(contract_id, version_id, lock=True)
         if version.status != "IN_REVIEW":
             raise LifecycleError("Only submitted versions can be reviewed")
         if version.created_by == self.actor:
-            raise LifecycleError("Creator cannot approve their own version")
+            raise LifecycleError("Creator cannot review their own version")
         version.status = "APPROVED" if approved else "REJECTED"
         self.db.add(ContractApproval(tenant_id=self.tenant_id, version_id=version.id,
                                      decision=version.status, reviewer_id=self.actor, reason=reason))
@@ -92,7 +95,7 @@ class ContractService:
 
     def activate(self, contract_id, version_id, environment):
         self.contract(contract_id, lock=True)
-        version = self.version(contract_id, version_id)
+        version = self.version(contract_id, version_id, lock=True)
         if version.status != "APPROVED":
             raise LifecycleError("Only approved versions can activate")
         if not environment or len(environment) > 64:
