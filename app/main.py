@@ -68,3 +68,7 @@ app.include_router(lifecycle_router)
 # Execution is guarded by the same local-only lifecycle mode.
 from app.execution_api import router as execution_router
 app.include_router(execution_router)
+
+# Local-only, provider-configured discovery pipeline.
+from app.discovery_api import router as discovery_router
+app.include_router(discovery_router)
