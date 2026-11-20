@@ -60,3 +60,7 @@ def validate_schema(req: SchemaRequest):
     except Exception as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     return {"valid": not errors, "errors": [{"path": list(e.path), "message": e.message} for e in errors]}
+
+# Lifecycle endpoints remain disabled unless explicitly enabled for local tests.
+from app.lifecycle_api import router as lifecycle_router
+app.include_router(lifecycle_router)
