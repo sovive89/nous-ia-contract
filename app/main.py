@@ -64,3 +64,7 @@ def validate_schema(req: SchemaRequest):
 # Lifecycle endpoints remain disabled unless explicitly enabled for local tests.
 from app.lifecycle_api import router as lifecycle_router
 app.include_router(lifecycle_router)
+
+# Execution is guarded by the same local-only lifecycle mode.
+from app.execution_api import router as execution_router
+app.include_router(execution_router)
