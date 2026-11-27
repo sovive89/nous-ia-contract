@@ -1,0 +1,318 @@
+{
+  "observed_at": "2026-11-15T19:01:27.880996+00:00",
+  "environment": "isolated Linux session; not the Windows notebook",
+  "base_commit": "5ea7f79960a5ac387b3f92e339f45517d5b082c1",
+  "python": "3.12.14",
+  "dependencies": {
+    "fastapi": "0.163.1",
+    "uvicorn": "0.54.0",
+    "pydantic": "2.14.3",
+    "jsonschema": "4.26.0",
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "starlette": "1.10.0"
+  },
+  "cases": [
+    {
+      "name": "ifood-valid",
+      "request": {
+        "tenant_id": "demo-local",
+        "source": "ifood",
+        "payload": {
+          "orderId": "PEDIDO-IFOOD-001",
+          "eventId": "EVENTO-IFOOD-001",
+          "code": "CONFIRMED",
+          "total": "49.90",
+          "currency": "BRL",
+          "occurred_at": "2026-11-15T12:00:00-03:00"
+        }
+      },
+      "expected_status": 200,
+      "actual_status": 200,
+      "response": {
+        "canonical_event": {
+          "tenant_id": "demo-local",
+          "source": "ifood",
+          "event_id": "EVENTO-IFOOD-001",
+          "event_type": "order.status_changed",
+          "schema_ref": "nous.order-status.v1",
+          "occurred_at": "2026-11-15T15:00:00Z",
+          "subject": {
+            "entity_type": "order",
+            "external_id": "PEDIDO-IFOOD-001"
+          },
+          "payload": {
+            "order_id": "PEDIDO-IFOOD-001",
+            "source_status": "CONFIRMED",
+            "total_minor": 4990,
+            "currency": "BRL"
+          },
+          "simulation": true
+        },
+        "requires_human_review": true,
+        "persisted": false,
+        "published": false,
+        "warning": "Synthetic simulation only; no official provider integration or durable idempotency."
+      },
+      "checks": {
+        "http_status": true,
+        "canonical_event_matches": true,
+        "human_review_required": true,
+        "not_persisted": true,
+        "not_published": true
+      },
+      "passed": true
+    },
+    {
+      "name": "99food-valid",
+      "request": {
+        "tenant_id": "demo-local",
+        "source": "99food",
+        "payload": {
+          "order_id": "PEDIDO-99FOOD-001",
+          "event_id": "EVENTO-99FOOD-001",
+          "status": "ACCEPTED",
+          "amount": "49.90",
+          "currency": "BRL",
+          "occurred_at": "2026-11-15T15:00:00Z"
+        }
+      },
+      "expected_status": 200,
+      "actual_status": 200,
+      "response": {
+        "canonical_event": {
+          "tenant_id": "demo-local",
+          "source": "99food",
+          "event_id": "EVENTO-99FOOD-001",
+          "event_type": "order.status_changed",
+          "schema_ref": "nous.order-status.v1",
+          "occurred_at": "2026-11-15T15:00:00Z",
+          "subject": {
+            "entity_type": "order",
+            "external_id": "PEDIDO-99FOOD-001"
+          },
+          "payload": {
+            "order_id": "PEDIDO-99FOOD-001",
+            "source_status": "ACCEPTED",
+            "total_minor": 4990,
+            "currency": "BRL"
+          },
+          "simulation": true
+        },
+        "requires_human_review": true,
+        "persisted": false,
+        "published": false,
+        "warning": "Synthetic simulation only; no official provider integration or durable idempotency."
+      },
+      "checks": {
+        "http_status": true,
+        "canonical_event_matches": true,
+        "human_review_required": true,
+        "not_persisted": true,
+        "not_published": true
+      },
+      "passed": true
+    },
+    {
+      "name": "missing-order-id",
+      "request": {
+        "tenant_id": "demo-local",
+        "source": "ifood",
+        "payload": {}
+      },
+      "expected_status": 422,
+      "actual_status": 422,
+      "response": {
+        "detail": "orderId must be a nonempty string"
+      },
+      "checks": {
+        "http_status": true
+      },
+      "passed": true
+    },
+    {
+      "name": "excess-decimals",
+      "request": {
+        "tenant_id": "demo-local",
+        "source": "ifood",
+        "payload": {
+          "orderId": "PEDIDO-IFOOD-001",
+          "eventId": "EVENTO-IFOOD-001",
+          "code": "CONFIRMED",
+          "total": "1.999",
+          "currency": "BRL",
+          "occurred_at": "2026-11-15T12:00:00-03:00"
+        }
+      },
+      "expected_status": 422,
+      "actual_status": 422,
+      "response": {
+        "detail": "amount must be nonnegative with at most two decimals"
+      },
+      "checks": {
+        "http_status": true
+      },
+      "passed": true
+    },
+    {
+      "name": "unsupported-currency",
+      "request": {
+        "tenant_id": "demo-local",
+        "source": "ifood",
+        "payload": {
+          "orderId": "PEDIDO-IFOOD-001",
+          "eventId": "EVENTO-IFOOD-001",
+          "code": "CONFIRMED",
+          "total": "49.90",
+          "currency": "USD",
+          "occurred_at": "2026-11-15T12:00:00-03:00"
+        }
+      },
+      "expected_status": 422,
+      "actual_status": 422,
+      "response": {
+        "detail": "only BRL is supported by the simulator"
+      },
+      "checks": {
+        "http_status": true
+      },
+      "passed": true
+    },
+    {
+      "name": "missing-timezone",
+      "request": {
+        "tenant_id": "demo-local",
+        "source": "ifood",
+        "payload": {
+          "orderId": "PEDIDO-IFOOD-001",
+          "eventId": "EVENTO-IFOOD-001",
+          "code": "CONFIRMED",
+          "total": "49.90",
+          "currency": "BRL",
+          "occurred_at": "2026-11-15T15:00:00"
+        }
+      },
+      "expected_status": 422,
+      "actual_status": 422,
+      "response": {
+        "detail": "occurred_at must include a timezone"
+      },
+      "checks": {
+        "http_status": true
+      },
+      "passed": true
+    },
+    {
+      "name": "float-amount",
+      "request": {
+        "tenant_id": "demo-local",
+        "source": "ifood",
+        "payload": {
+          "orderId": "PEDIDO-IFOOD-001",
+          "eventId": "EVENTO-IFOOD-001",
+          "code": "CONFIRMED",
+          "total": 49.9,
+          "currency": "BRL",
+          "occurred_at": "2026-11-15T12:00:00-03:00"
+        }
+      },
+      "expected_status": 422,
+      "actual_status": 422,
+      "response": {
+        "detail": "amount must be a decimal string or integer"
+      },
+      "checks": {
+        "http_status": true
+      },
+      "passed": true
+    }
+  ],
+  "schema_observations": [
+    {
+      "schema": "event-envelope.schema.json",
+      "http_status": 200,
+      "response": {
+        "valid": false,
+        "errors": [
+          {
+            "path": [],
+            "message": "Additional properties are not allowed ('simulation' was unexpected)"
+          }
+        ]
+      },
+      "interpretation": "Compatibility diagnostic only. The simulator does not apply this schema."
+    },
+    {
+      "schema": "nous.delivery.order.v1.json",
+      "http_status": 200,
+      "response": {
+        "valid": false,
+        "errors": [
+          {
+            "path": [],
+            "message": "Additional properties are not allowed ('total_minor' was unexpected)"
+          },
+          {
+            "path": [],
+            "message": "'schema_version' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'tenant_id' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'source' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'external_order_id' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'merchant_id' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'status' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'occurred_at' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'items' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'totals' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'payment' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'fulfillment' is a required property"
+          },
+          {
+            "path": [],
+            "message": "'mapping_version' is a required property"
+          }
+        ]
+      },
+      "interpretation": "Compatibility diagnostic only. The simulator does not apply this schema."
+    }
+  ],
+  "listen_address": "http://127.0.0.1:41607",
+  "health": {
+    "status": 200,
+    "body": {
+      "status": "ok",
+      "service": "nous-ia-contract",
+      "version": "0.1.0"
+    }
+  },
+  "all_demo_checks_passed": true
+}

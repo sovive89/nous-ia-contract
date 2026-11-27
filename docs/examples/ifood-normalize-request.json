@@ -1,0 +1,12 @@
+{
+  "tenant_id": "demo-local",
+  "source": "ifood",
+  "payload": {
+    "orderId": "PEDIDO-IFOOD-001",
+    "eventId": "EVENTO-IFOOD-001",
+    "code": "CONFIRMED",
+    "total": "49.90",
+    "currency": "BRL",
+    "occurred_at": "2026-11-15T12:00:00-03:00"
+  }
+}
